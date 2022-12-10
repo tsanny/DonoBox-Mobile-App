@@ -208,7 +208,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               {
                                 if (value['role_error'])
                                   {
-                                    print(value),
                                     showDialog(
                                       context: context,
                                       builder: (context) {
