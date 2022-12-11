@@ -92,9 +92,45 @@ class _MyNotificationPageState extends State<MyNotificationPage> {
                                             ],
                                           ),
                                         ),
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Dialog(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10),
+                                              ),
+                                              elevation: 15,
+                                              child: Container(
+                                                child: ListView(
+                                                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                                  shrinkWrap: true,
+                                                  children: <Widget>[
+                                                    ListTile(
+                                                      title: Text(
+                                                        "${snapshot.data![index].fields.title}",
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
+                                                      subtitle: Text("${snapshot.data![index].fields.description}"),
+                                                      trailing: IconButton(
+                                                        icon: const Icon(
+                                                          Icons.close
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.pop(context);
+                                                        },
+                                                      ), 
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        );
+                                      }
                                     )
-                                );
-                          }
+                                  );
+                            }
                           }
                       }
                   )
