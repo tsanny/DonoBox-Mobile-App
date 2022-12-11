@@ -1,8 +1,13 @@
+import 'package:donobox/model/mynotification.dart';
 import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/FAQPage.dart';
+import 'package:donobox/pages/mynotification_page.dart';
 import 'package:flutter/material.dart';
 import '../drawer/sidebar.dart';
 import 'AskUsPage.dart';
+
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 import 'package:donobox/pages/artikel_page.dart';
 
@@ -17,6 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
+
     return Scaffold(
         backgroundColor: Colors.white,
         // bottomNavigationBar: BottomMenu(),
@@ -24,7 +31,8 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Color(0xFF3F4E4F),
           title: const Text('Hi, username!'),
           actions: <Widget>[
-            IconButton(
+            request.loggedIn
+            ?IconButton(
               icon: const Icon(
                 Icons.notifications_active,
                 color: Color(0xFF879999),
@@ -34,10 +42,11 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => const MyNotificationPage()),
                 );
               },
-            ),
+            )
+            :Container(),
           ],
         ),
         drawer: const drawer(),
