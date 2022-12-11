@@ -3,6 +3,7 @@ import 'package:donobox/pages/FAQPage.dart';
 import 'package:flutter/material.dart';
 import '../drawer/sidebar.dart';
 import 'AskUsPage.dart';
+
 import 'package:donobox/pages/artikel_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                                 // Route menu ke halaman form
                                 Navigator.pushReplacement(
                                   context,
+
                                   MaterialPageRoute(
                                       builder: (context) => const AboutUs()),
                                 );
@@ -86,6 +89,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 130,
                                       child: Column(
                                         children: [
+
                                           Image.asset(
                                             'assets/about_us.png',
                                             width: 200,
@@ -95,6 +99,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           const Text(
                                             "About Us",
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black45),
@@ -102,7 +107,9 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       ),
                                     ),
+
                                   )),
+
                             ),
                             GestureDetector(
                               // sambungin ke page modul masing2
@@ -113,7 +120,9 @@ class _HomePageState extends State<HomePage> {
                               //     MaterialPageRoute(builder: (context) => const MyHomePage()),
                               //   );
                               // },
+
                               child: Card(
+
                                   color: Color(0xFFF7F6F2),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
@@ -122,6 +131,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 130,
                                       child: Column(
                                         children: [
+
                                           Image.asset(
                                             'assets/article.png',
                                             width: 80,
@@ -131,6 +141,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           const Text(
                                             "Article",
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black45),
@@ -138,6 +149,7 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       ),
                                     ),
+
                                   )),
                               onTap: () {
                                 //   // Route menu ke halaman form
@@ -148,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                                           const ArtikelPage()),
                                 );
                               },
+
                             ),
                           ],
                         ),
@@ -163,7 +176,9 @@ class _HomePageState extends State<HomePage> {
                               //     MaterialPageRoute(builder: (context) => const MyHomePage()),
                               //   );
                               // },
+
                               child: Card(
+
                                   color: Color(0xFFF7F6F2),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
@@ -172,23 +187,29 @@ class _HomePageState extends State<HomePage> {
                                       height: 130,
                                       child: Column(
                                         children: [
+
                                           Image.asset(
                                             'assets/cek_saldo.png',
                                             width: 90,
                                           ),
+
                                           const SizedBox(
                                             height: 10,
                                           ),
                                           const Text(
                                             "Cek Saldo",
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black45),
+
                                           )
                                         ],
                                       ),
                                     ),
+
                                   )),
+
                             ),
                             GestureDetector(
                               // sambungin ke page modul masing2
@@ -199,7 +220,9 @@ class _HomePageState extends State<HomePage> {
                               //     MaterialPageRoute(builder: (context) => const MyHomePage()),
                               //   );
                               // },
+
                               child: Card(
+
                                   color: Color(0xFFF7F6F2),
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
@@ -208,23 +231,29 @@ class _HomePageState extends State<HomePage> {
                                       height: 130,
                                       child: Column(
                                         children: [
+
                                           Image.asset(
                                             'assets/crowdfund.png',
                                             width: 90,
                                           ),
+
                                           const SizedBox(
                                             height: 10,
                                           ),
                                           const Text(
                                             "CrowdFund",
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black45),
+
                                           )
                                         ],
                                       ),
                                     ),
+
                                   )),
+
                             ),
                           ],
                         ),
@@ -246,28 +275,38 @@ class _HomePageState extends State<HomePage> {
                                 // Route menu ke halaman form
                                 Navigator.pushReplacement(
                                   context,
+
                                   MaterialPageRoute(
                                       builder: (context) => const FAQ()),
                                 );
                               },
                               child: _roundedButton(title: 'FAQ'),
+
                             ),
                             GestureDetector(
                               onTap: () {
                                 // Route menu ke halaman form
                                 Navigator.pushReplacement(
                                   context,
+
                                   MaterialPageRoute(
                                       builder: (context) => const AskUsPage()),
                                 );
                               },
                               child: _roundedButton(title: 'Ask Us'),
+
                             ),
                           ],
                         ),
                         const SizedBox(height: 30),
-                      ]))
-                ]))));
+
+                      ]
+                    )
+                  )
+            ])
+          ))
+      );
+
   }
 
   Widget _roundedButton({
