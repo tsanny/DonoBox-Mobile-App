@@ -33,7 +33,7 @@ class drawer extends StatelessWidget {
       onTap: () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const AskUsPage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
       },
       child: Container(

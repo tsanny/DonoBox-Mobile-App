@@ -18,6 +18,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final _tambahSaldoFormKey = GlobalKey<FormState>();
+  var nominalSaldo = 0;
+
   Future<List<Profile>> fetchProfile() async {
     final request = context.watch<CookieRequest>();
     final response = await request.get('https://pbp-c04.up.railway.app/profile/json');
@@ -36,6 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
@@ -229,14 +233,150 @@ class _ProfilePageState extends State<ProfilePage> {
                                       elevation: 0,
                                       label: const Text("Edit Profile"),
                                       icon: const Icon(Icons.person_add_alt_1),
-                                        backgroundColor: Color(0xFF3F4E4F),
+                                        backgroundColor: Color(0xFFA2CC83),
                                     ),
                                     const SizedBox(width: 16.0),
                                     FloatingActionButton.extended(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context){
+                                          return Scaffold(
+                                            body: Form(
+                                              key: _tambahSaldoFormKey,
+                                              child:
+                                                SingleChildScrollView(
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        margin: const EdgeInsets.all(20.0),
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children : const [
+                                                            Text(
+                                                              "Tambah Saldo",
+                                                              style: TextStyle(fontSize: 22),
+                                                            )
+                                                          ]
+                                                        )
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                          child: TextFormField(
+                                                            keyboardType: TextInputType.number,
+                                                            decoration: InputDecoration(
+                                                              labelText: "Nominal",
+                                                              labelStyle: const TextStyle(
+                                                                  color: Color(0xFF3F4E4F)),
+                                                              border: OutlineInputBorder(
+                                                                borderRadius:
+                                                                BorderRadius.circular(5.0),
+                                                                borderSide: const BorderSide(
+                                                                    color: Color(0xFF3F4E4F)),
+                                                              ),
+                                                              focusedBorder: OutlineInputBorder(
+                                                                borderRadius:
+                                                                BorderRadius.circular(5.0),
+                                                                borderSide: const BorderSide(
+                                                                    color: Color(0xFF3F4E4F)),
+                                                              ),
+                                                            ),
+                                                            validator: (String? value) {
+                                                              if (value == null || value.isEmpty || int.parse(value) < 1) {
+                                                                return 'Error';
+                                                              }
+                                                              return null;
+                                                            },
+                                                            onChanged: (String? value) {
+                                                              setState(() {
+                                                                nominalSaldo = int.parse(value!);
+                                                              });
+                                                            },
+                                                            onSaved: ((String? value) {
+                                                              setState(() {
+                                                                nominalSaldo = int.parse(value!);
+                                                              });
+                                                            }),
+                                                          )
+                                                      ),
+                                                Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: TextButton(
+                                                          style: ElevatedButton.styleFrom(
+                                                            backgroundColor: Color(0xFFA2CC83),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius.circular(10.0),
+                                                            ),
+                                                            padding: const EdgeInsets.all(16.0),
+                                                            tapTargetSize: MaterialTapTargetSize
+                                                                .shrinkWrap,
+                                                            alignment: Alignment.center,
+                                                          ),
+                                                          onPressed: () async {
+                                                            if (_tambahSaldoFormKey.currentState!
+                                                                .validate()) {
+                                                              final response = await request.post(
+                                                                  "https://pbp-c04.up.railway.app/profile/saldo/",
+                                                                  {
+                                                                    'saldo': nominalSaldo,
+                                                                  }).then((value) => {
+                                                                Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                      const ProfilePage()),
+                                                                )
+                                                              });
+                                                            }
+                                                          },
+                                                          child: const Text("Tambah",
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 20)),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: TextButton(
+                                                          style: ElevatedButton.styleFrom(
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius.circular(10.0),
+                                                            ),
+                                                            backgroundColor: Color(0xFFA2CC83),
+                                                            padding: const EdgeInsets.all(16.0),
+                                                            tapTargetSize: MaterialTapTargetSize
+                                                                .shrinkWrap,
+                                                            alignment: Alignment.center,
+                                                          ),
+                                                          onPressed: () => Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                const ProfilePage()),
+                                                          ),
+                                                          child: const Text("Kembali",
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 20)),
+                                                        ),
+                                                      ),
+                                                    ]
+                                                  )
+                                                ])
+                                            )
+                                          )
+                                              );
+                                        }
+                                        );
+                                      },
                                       heroTag: 'mesage',
                                       elevation: 0,
-                                      backgroundColor: Color(0xFF3F4E4F),
+                                      backgroundColor: Color(0xFFA2CC83),
                                       label: const Text("Tambah Saldo"),
                                       icon: const Icon(Icons.money),
                                     ),

@@ -1,5 +1,8 @@
+import 'package:donobox/pages/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:donobox/pages/homepage.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -35,6 +38,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
@@ -158,7 +162,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       SizedBox(height: 20.0,),
                       ElevatedButton(
                         onPressed: () => _selectDate(context),
-                        child: Text('Select date'),
+                        child: Text('Select Birthday'),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Color(0xFFA2CC83)),
+                        ),
                       ),
                     ],
                   ),
@@ -169,40 +176,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor: MaterialStateProperty.all(Color(0xFFA2CC83)),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
                     if (_formKey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            elevation: 15,
-                            child: Container(
-                              child: ListView(
-                                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                                shrinkWrap: true,
-                                children: <Widget>[
-                                  SizedBox(height: 20),
-                                  Center(child: const Text("Profile Updated!")),
-                                  Text('Phone Number : ' + _phoneNumber),
-                                  Text('Email : ' + _email),
-                                  Text('Birthday : ' + _convertedDate),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Kembali'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                      final response = await request.post(
+                          "https://pbp-c04.up.railway.app/profile/edit-profile-flutter/",
+                          {
+                            'bio': _bio,
+                            'phone': _phoneNumber,
+                            'email' : _email,
+                          }).then((value) => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const ProfilePage(),
+                        )
+                        )});
+
 
                     }
                   },
