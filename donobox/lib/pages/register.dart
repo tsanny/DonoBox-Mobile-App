@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 import 'login.dart';
 import 'dart:convert';
-import '../drawer/sidebar.dart';
+import '../../drawer/sidebar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:donobox/pages/homepage.dart';

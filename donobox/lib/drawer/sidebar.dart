@@ -1,10 +1,10 @@
 import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/AskUsPage.dart';
 import 'package:flutter/material.dart';
-import 'package:donobox/artikel_page.dart';
+import 'package:donobox/pages/artikel_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:donobox/login.dart';
+import 'package:donobox/pages/login.dart';
 
 import '../pages/homepage.dart';
 
