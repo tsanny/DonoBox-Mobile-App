@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2f55a8b1-9881-48ac-8556-1667ee3a5919" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/flutter_c04_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/flutter_c04_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_c04.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_c04.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +58,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/donobox/lib" />
       <recent name="$PROJECT_DIR$/donobox/lib/pages" />
     </key>
   </component>
