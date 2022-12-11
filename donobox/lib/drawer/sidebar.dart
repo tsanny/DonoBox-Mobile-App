@@ -24,16 +24,18 @@ class drawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          buildHeader(context),
+          buildHeader(context, request),
           buildMenuItems(context, request),
         ],
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context) => Material(
+  Widget buildHeader(BuildContext context,  CookieRequest request) => Material(
         color: Color(0xFF3F4E4F),
-        child: InkWell(
+        child:
+        request.loggedIn
+          ?InkWell(
           onTap: () {
             Navigator.pushReplacement(
               context,
@@ -47,20 +49,24 @@ class drawer extends StatelessWidget {
               bottom: 24,
             ),
             child: Column(
-              children: const [
+              children: [
                 CircleAvatar(
                   radius: 52,
                   backgroundImage: AssetImage('assets/profile.png'),
                 ),
                 SizedBox(height: 12),
-                Text(
-                  'Nama',
-                  style: TextStyle(fontSize: 28, color: Colors.white),
-                ),
-              ],
+                Text(request.jsonData['username'] == null
+                    ? ""
+                    : "${request.jsonData['username']}",
+                  style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,),
+                )],
             ),
           ),
-        ),
+        )
+          : Container(),
       );
 
   Widget buildMenuItems(BuildContext context, CookieRequest request) =>
@@ -79,6 +85,21 @@ class drawer extends StatelessWidget {
                 );
               },
             ),
+            request.loggedIn
+                ? ListTile(
+              leading:
+              const Icon(Icons.notifications, color: Color(0xFFA2CC83)),
+              title: const Text('Notifications'),
+              onTap: () {
+                // Route menu ke halaman notifikasi
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyNotificationPage()),
+                );
+              },
+            )
+                : Container(),
             ListTile(
               leading: Image.asset(
                 'assets/logo.png',
@@ -128,6 +149,8 @@ class drawer extends StatelessWidget {
             ),
             !request.loggedIn
                 ? ListTile(
+                    leading:
+                      const Icon(Icons.login, color: Color(0xFFA2CC83)),
                     title: const Text('Login'),
                     onTap: () {
                       // Route menu ke halaman form
@@ -139,6 +162,8 @@ class drawer extends StatelessWidget {
                     },
                   )
                 : ListTile(
+                    leading:
+                        const Icon(Icons.logout, color: Color(0xFFA2CC83)),
                     title: const Text("Logout"),
                     onTap: () async {
                       Navigator.push(
@@ -149,19 +174,6 @@ class drawer extends StatelessWidget {
                           "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
                     },
             ),
-            request.loggedIn
-                ? ListTile(
-                    title: const Text('Notifications'),
-                    onTap: () {
-                      // Route menu ke halaman notifikasi
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyNotificationPage()),
-                      );
-                    },
-                  )
-                : Container()
           ],
         ),
       );

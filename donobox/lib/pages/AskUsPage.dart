@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:donobox/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import '../drawer/sidebar.dart';
 import '../model/faq_model.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class AskUsPage extends StatefulWidget {
   const AskUsPage({Key? key}) : super(key: key);
@@ -39,6 +42,7 @@ class _AskUsPageState extends State<AskUsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
@@ -53,6 +57,7 @@ class _AskUsPageState extends State<AskUsPage> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (request.loggedIn)
                   Padding(
                     // Menggunakan padding sebesar 8 pixels
                     padding: const EdgeInsets.all(30.0),
@@ -87,9 +92,32 @@ class _AskUsPageState extends State<AskUsPage> {
                     ),
                   ),
                   const SizedBox(height: 40),
+                  if(!request.loggedIn)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          child: const Text(
+                            "Login ",
+                            style: TextStyle(color: Color(0xFFA2CC83), fontSize: 16),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()),
+                            );
+                          },
+                        ),
+                        const Text("untuk bertanya ",
+                            style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  const SizedBox(height: 40),
+                  if (request.loggedIn)
                   Center(
                     child: MaterialButton(
-                      color: Color(0xFF879999),
+                      color: Color(0xFFA2CC83),
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(14.0)),
                           side: BorderSide(color: Color(0xFFDCF5E6))),

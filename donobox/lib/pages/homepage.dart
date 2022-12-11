@@ -29,7 +29,9 @@ class _HomePageState extends State<HomePage> {
         // bottomNavigationBar: BottomMenu(),
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
-          title: const Text('Hi, username!'),
+          title: Text(request.jsonData['username'] == null
+              ? ""
+              : "Hi, ${request.jsonData['username']}!"),
           actions: <Widget>[
             request.loggedIn
             ?IconButton(
