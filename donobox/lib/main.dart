@@ -1,3 +1,4 @@
+import 'package:donobox/pages/SpalshScreenPage.dart';
 import 'package:donobox/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:donobox/pages/profile.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: SplashScreen(title: 'Flutter Login UI'),
       ),
     );
   }

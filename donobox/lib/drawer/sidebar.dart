@@ -1,5 +1,6 @@
 import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/AskUsPage.dart';
+import 'package:donobox/pages/mynotification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:donobox/pages/artikel_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -20,44 +21,50 @@ class drawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          buildHeader(context),
+          buildHeader(context, request),
           buildMenuItems(context, request),
         ],
       ),
     );
   }
 
-  Widget buildHeader(BuildContext context) => Material(
-    color: Color(0xFF3F4E4F),
-    child: InkWell(
-      onTap: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ProfilePage()),
-        );
-      },
-      child: Container(
+  Widget buildHeader(BuildContext context,  CookieRequest request) => Material(
         color: Color(0xFF3F4E4F),
-        padding: EdgeInsets.only(
-          top: 24 + MediaQuery.of(context).padding.top,
-          bottom: 24,
-        ),
-        child: Column(
-          children: const [
-            CircleAvatar(
-              radius: 52,
-              backgroundImage: AssetImage('assets/profile.png'),
+        child:
+        request.loggedIn
+          ?InkWell(
+          onTap: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
+            );
+          },
+          child: Container(
+            color: Color(0xFF3F4E4F),
+            padding: EdgeInsets.only(
+              top: 24 + MediaQuery.of(context).padding.top,
+              bottom: 24,
             ),
-            SizedBox(height: 12),
-            Text(
-              'Nama',
-              style: TextStyle(fontSize: 28, color: Colors.white),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 52,
+                  backgroundImage: AssetImage('assets/profile.png'),
+                ),
+                SizedBox(height: 12),
+                Text(request.jsonData['username'] == null
+                    ? ""
+                    : "${request.jsonData['username']}",
+                  style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,),
+                )],
             ),
-          ],
-        ),
-      ),
-    ),
-  );
+          ),
+        )
+          : Container(),
+      );
 
   Widget buildMenuItems(BuildContext context, CookieRequest request) =>
       Container(
@@ -75,6 +82,21 @@ class drawer extends StatelessWidget {
                 );
               },
             ),
+            request.loggedIn
+                ? ListTile(
+              leading:
+              const Icon(Icons.notifications, color: Color(0xFFA2CC83)),
+              title: const Text('Notifications'),
+              onTap: () {
+                // Route menu ke halaman notifikasi
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyNotificationPage()),
+                );
+              },
+            )
+                : Container(),
             ListTile(
               leading: Image.asset(
                 'assets/logo.png',
@@ -124,27 +146,27 @@ class drawer extends StatelessWidget {
             ),
             !request.loggedIn
                 ? ListTile(
-              title: const Text('Login'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LoginPage()),
-                );
-              },
-            )
+                    title: const Text('Login'),
+                    onTap: () {
+                      // Route menu ke halaman form
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
+                    },
+                  )
                 : ListTile(
-              title: const Text("Logout"),
-              onTap: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomePage()));
-                final response = await request.logout(
-                    "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
-              },
-            )
+                    title: const Text("Logout"),
+                    onTap: () async {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()));
+                      final response = await request.logout(
+                          "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
+                    },
+                  )
           ],
         ),
       );

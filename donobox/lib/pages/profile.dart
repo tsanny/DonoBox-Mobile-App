@@ -1,6 +1,6 @@
 import 'package:donobox/pages/editprofilepage.dart';
 import 'package:flutter/material.dart';
-import 'package:donobox/pages/main.dart';
+import 'package:donobox/main.dart';
 import 'package:donobox/pages/profile.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
