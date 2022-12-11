@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
-          title: const Text('Hi, username!'),
+          title: const Text('Profile'),
           actions: <Widget>[
             IconButton(
               icon: const Icon(
@@ -58,51 +58,70 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
         drawer: drawer(),
-        body: FutureBuilder(
-                future: fetchProfile(),
-                builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == null) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    if (!snapshot.hasData) {
-                      return Column(
-                        children: const [
-                          Text(
-                            "Tidak ada data!",
-                            style:
-                            TextStyle(color: Color(0xff59A5D8), fontSize: 20),
-                          ),
-                          SizedBox(height: 8),
-                        ],
-                      );
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding : EdgeInsets.fromLTRB(30, 40, 30, 40),
+              child: Center(
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/profile.png'),
+                  radius: 60,
+                ),
+              )
+            ),
+            Expanded(
+              flex: 1,
+              child: FutureBuilder(
+                  future: fetchProfile(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      return const Center(child: CircularProgressIndicator());
                     } else {
-                      return ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (_, index) => InkWell(
-                              child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 12),
-                                  padding: const EdgeInsets.all(20.0),
-                                  decoration: BoxDecoration(
+                      if (!snapshot.hasData) {
+                        return Column(
+                          children: const [
+                            Text(
+                              "Tidak ada data!",
+                              style:
+                              TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                            ),
+                            SizedBox(height: 8),
+                          ],
+                        );
+                      } else {
+                        return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (_, index) => InkWell(
+                                child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 12),
+                                    padding: const EdgeInsets.all(20.0),
+                                    decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text("${snapshot.data![index].fields.role}",
-                                          style: const TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold,
-                                          )),
-                                    ],
-                                  )
-                              )
-                          )
-                      );
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text("${snapshot.data![index].fields.role}",
+                                            style: const TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ],
+                                    )
+                                )
+                            )
+                        );
+                      }
                     }
                   }
-                }
-                )
+              ),
+            ),
+
+        ],
+        )
+
 
     );
   }
