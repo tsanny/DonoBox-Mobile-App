@@ -17,6 +17,7 @@ class _AskUsPageState extends State<AskUsPage> {
   final _formKey = GlobalKey<FormState>();
   String _pertanyaan = "";
 
+
   Future<List<Faq>> fetchFaq() async{
     var url = 'https://pbp-c04.up.railway.app/json/';
     var response = await http.get(
@@ -34,7 +35,6 @@ class _AskUsPageState extends State<AskUsPage> {
       }
     }
     return listMyWatchList;
-
   }
 
   @override
