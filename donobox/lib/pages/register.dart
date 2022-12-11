@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'drawer.dart';
+import '../main.dart';
 import 'login.dart';
 import 'dart:convert';
-
+import '../../drawer/sidebar.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:donobox/pages/homepage.dart';
 
 import 'dart:io';
 
@@ -29,15 +29,17 @@ class _RegisterPageState extends State<RegisterPage> {
   String username = "";
   String password1 = "";
   String password2 = "";
-  String role = "";
+  String role = "Donatur";
+  List<String> listRole = ['Donatur', 'Fundraiser'];
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
 
     // TODO: implement build
     return Scaffold(
-      drawer: AppDrawer(),
+      drawer: const drawer(),
       appBar: AppBar(
+        backgroundColor: Color(0xFF3F4E4F),
         title: Text(""),
       ),
       body: Form(
@@ -55,8 +57,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: "Username",
+                    labelStyle: const TextStyle(color: Color(0xFF3F4E4F)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -90,8 +98,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined),
                     ),
+                    labelStyle: const TextStyle(color: Color(0xFF3F4E4F)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -126,8 +140,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined),
                     ),
+                    labelStyle: const TextStyle(color: Color(0xFF3F4E4F)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -152,39 +172,32 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 20),
               const Text("Pilih Role:"),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: <
-                  Widget>[
-                Radio(
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue),
-                  value: "Donatur",
-                  groupValue: role,
-                  onChanged: (String? value) {
-                    setState(() {
-                      role = value!;
-                    });
-                  },
-                ),
-                const Text('Donatur'),
-                Radio(
-                  fillColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue),
-                  value: "Fundraiser",
-                  groupValue: role,
-                  onChanged: (String? value) {
-                    setState(() {
-                      role = value!;
-                    });
-                  },
-                ),
-                const Text('Fundraiser')
-              ]),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    DropdownButton(
+                      value: role,
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                      items: listRole.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          role = newValue!;
+                        });
+                      },
+                    ),
+                  ]),
               SizedBox(
                 width: 90,
                 height: 35,
                 child: TextButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFFA2CC83)),
                   ),
                   onPressed: () async {
                     if (_regFormKey.currentState!.validate()) {
@@ -203,6 +216,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   MaterialPageRoute(
                                       builder: (context) => const LoginPage()),
                                 ),
+                                request.logout(
+                                    "https://pbp-c04.up.railway.app/autentikasi/logout_apk/")
                               }
                             else
                               {

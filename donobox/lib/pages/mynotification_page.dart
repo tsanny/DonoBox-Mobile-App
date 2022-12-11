@@ -1,6 +1,6 @@
 import 'package:donobox/main.dart';
-import 'package:donobox/login.dart';
-import 'package:donobox/drawer.dart';
+import 'package:donobox/pages/login.dart';
+import 'package:donobox/drawer/sidebar.dart';
 import 'package:donobox/model/mynotification.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -39,7 +39,7 @@ class _MyNotificationPageState extends State<MyNotificationPage> {
             appBar: AppBar(
                 title: const Text('My Notification'),
             ),
-            drawer: const AppDrawer(),
+            drawer: const drawer(),
             body: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: FutureBuilder(
