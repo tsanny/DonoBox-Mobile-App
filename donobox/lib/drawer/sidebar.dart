@@ -2,16 +2,13 @@ import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/AskUsPage.dart';
 import 'package:donobox/pages/mynotification_page.dart';
 import 'package:flutter/material.dart';
-
 import 'package:donobox/pages/artikel_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:donobox/pages/login.dart';
-
-
+import 'package:donobox/pages/profile.dart';
+import 'package:donobox/pages/editprofilepage.dart';
 import '../pages/homepage.dart';
-
-import 'package:flutter/material.dart';
 
 class drawer extends StatelessWidget {
   const drawer({Key? key}) : super(key: key);
@@ -39,7 +36,7 @@ class drawer extends StatelessWidget {
           onTap: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const AskUsPage()),
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
             );
           },
           child: Container(
@@ -131,13 +128,13 @@ class drawer extends StatelessWidget {
                 // Route menu ke halaman utama
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
                 );
               },
             ),
             ListTile(
               leading:
-                  const Icon(Icons.money_rounded, color: Color(0xFFA2CC83)),
+              const Icon(Icons.money_rounded, color: Color(0xFFA2CC83)),
               title: const Text('CrowdFund'),
               onTap: () {
                 // Route menu ke halaman utama
@@ -149,8 +146,6 @@ class drawer extends StatelessWidget {
             ),
             !request.loggedIn
                 ? ListTile(
-                    leading:
-                      const Icon(Icons.login, color: Color(0xFFA2CC83)),
                     title: const Text('Login'),
                     onTap: () {
                       // Route menu ke halaman form
@@ -162,8 +157,6 @@ class drawer extends StatelessWidget {
                     },
                   )
                 : ListTile(
-                    leading:
-                        const Icon(Icons.logout, color: Color(0xFFA2CC83)),
                     title: const Text("Logout"),
                     onTap: () async {
                       Navigator.push(
@@ -173,7 +166,7 @@ class drawer extends StatelessWidget {
                       final response = await request.logout(
                           "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
                     },
-            ),
+                  )
           ],
         ),
       );

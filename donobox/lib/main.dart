@@ -1,9 +1,15 @@
 import 'package:donobox/pages/SpalshScreenPage.dart';
 import 'package:donobox/pages/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:donobox/pages/profile.dart';
+import 'package:donobox/pages/editprofilepage.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +17,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
 
   // This widget is the root of your application.
   @override
@@ -68,7 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
