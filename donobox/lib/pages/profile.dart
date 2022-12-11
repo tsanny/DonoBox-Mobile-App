@@ -25,6 +25,10 @@ class ProfilePage1 extends StatelessWidget {
                         .headline6
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: const Text("Rp.10000"),
+                  ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +167,7 @@ class _TopPortion extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color(0xff0043ba), Color(0xff006df1)]),
+                  colors: [Color(0xFFA2CC83), Color(0xFFA2CC85)]),
                   borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50),
