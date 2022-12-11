@@ -1,6 +1,7 @@
 import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/AskUsPage.dart';
 import 'package:flutter/material.dart';
+import 'package:donobox/pages/profile.dart';
 
 import '../pages/homepage.dart';
 
@@ -97,7 +98,7 @@ class drawer extends StatelessWidget {
             // Route menu ke halaman utama
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const ProfilePage1()),
             );
           },
         ),
