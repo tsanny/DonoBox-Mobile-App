@@ -1,5 +1,6 @@
 import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/AskUsPage.dart';
+import 'package:donobox/pages/mynotification_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:donobox/pages/artikel_page.dart';
@@ -147,7 +148,20 @@ class drawer extends StatelessWidget {
                       final response = await request.logout(
                           "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
                     },
+            ),
+            request.loggedIn
+                ? ListTile(
+                    title: const Text('Notifications'),
+                    onTap: () {
+                      // Route menu ke halaman notifikasi
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyNotificationPage()),
+                      );
+                    },
                   )
+                : Container()
           ],
         ),
       );

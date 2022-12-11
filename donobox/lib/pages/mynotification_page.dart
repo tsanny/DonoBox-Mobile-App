@@ -37,6 +37,7 @@ class _MyNotificationPageState extends State<MyNotificationPage> {
         final request = context.read<CookieRequest>();
         return Scaffold(
             appBar: AppBar(
+                backgroundColor: Color(0xFF3F4E4F),
                 title: const Text('My Notification'),
             ),
             drawer: const drawer(),
