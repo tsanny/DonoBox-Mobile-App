@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'drawer.dart';
+import '../main.dart';
 import 'register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import '../../drawer/sidebar.dart';
+import 'package:donobox/pages/homepage.dart';
 
 import 'dart:io';
 
@@ -33,11 +34,12 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF3F4E4F),
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(""),
       ),
-      drawer: const AppDrawer(),
+      drawer: const drawer(),
       body: Form(
         key: _loginFormKey,
         child: Container(
@@ -53,8 +55,14 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: "Username",
+                    labelStyle: const TextStyle(color: Color(0xFF3F4E4F)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -82,10 +90,17 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: !isPasswordVisible,
                   decoration: InputDecoration(
                     labelText: "Password",
+                    labelStyle: const TextStyle(color: Color(0xFF3F4E4F)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(color: Color(0xFF3F4E4F)),
                     ),
                   ),
+
                   onChanged: (String? value) {
                     setState(() {
                       password1 = value!;
@@ -114,7 +129,8 @@ class _LoginPageState extends State<LoginPage> {
                 height: 35,
                 child: TextButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFFA2CC83)),
                   ),
                   onPressed: () async {
                     if (_loginFormKey.currentState!.validate()) {
@@ -132,9 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MyHomePage(
-                                    title: '',
-                                  )),
+                              builder: (context) => const HomePage()),
                         );
                       } else {
                         // Code here will run if the login failed (wrong username/password).
@@ -195,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                   InkWell(
                     child: Text(
                       "Buat Akun",
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      style: TextStyle(color: Color(0xFFA2CC83), fontSize: 16),
                     ),
                     onTap: () {
                       Navigator.push(
