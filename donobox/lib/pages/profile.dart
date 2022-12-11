@@ -2,6 +2,8 @@ import 'package:donobox/pages/editprofilepage.dart';
 import 'package:flutter/material.dart';
 import 'package:donobox/pages/main.dart';
 import 'package:donobox/pages/profile.dart';
+import '../drawer/sidebar.dart';
+import 'package:donobox/pages/homepage.dart';
 
 class ProfilePage1 extends StatelessWidget {
   const ProfilePage1({Key? key}) : super(key: key);
@@ -9,6 +11,25 @@ class ProfilePage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF3F4E4F),
+        title: const Text('Hi, username!'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notifications_active,
+              color: Color(0xFF879999),
+              size: 30,),
+            tooltip: 'Notification',
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
+          ),
+        ],
+      ),
+      drawer: const drawer(),
       body: Column(
         children: [
           const Expanded(flex: 2, child: _TopPortion()),
@@ -44,15 +65,16 @@ class ProfilePage1 extends StatelessWidget {
                         elevation: 0,
                         label: const Text("Edit Profile"),
                         icon: const Icon(Icons.person_add_alt_1),
+                          backgroundColor: Color(0xFF3F4E4F),
                       ),
                       const SizedBox(width: 16.0),
                       FloatingActionButton.extended(
                         onPressed: () {},
-                        heroTag: 'mesage',
+                        heroTag: 'saldo',
                         elevation: 0,
-                        backgroundColor: Colors.red,
+                        backgroundColor: Color(0xFF3F4E4F),
                         label: const Text("Tambah Saldo"),
-                        icon: const Icon(Icons.message_rounded),
+                        icon: const Icon(Icons.money),
                       ),
                     ],
                   ),
@@ -63,33 +85,6 @@ class ProfilePage1 extends StatelessWidget {
             ),
           ),
         ],
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('Profile'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyApp()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Profile'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage1()),
-                );
-              },
-            ),
-          ],
-        ),
       ),
     );
   }

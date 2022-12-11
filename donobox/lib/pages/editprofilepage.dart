@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:donobox/pages/homepage.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -36,9 +36,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Form'),
-      ),
+        appBar: AppBar(
+          backgroundColor: Color(0xFF3F4E4F),
+          title: const Text('Hi, username!'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.notifications_active,
+                color: Color(0xFF879999),
+                size: 30,),
+              tooltip: 'Notification',
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              },
+            ),
+          ],
+        ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
