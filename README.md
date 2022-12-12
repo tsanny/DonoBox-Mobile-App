@@ -46,4 +46,4 @@ Dengan adanya DonoBox, pengguna dapat berdonasi atau bersedekah sebagai bentuk s
 5. File APK dari Codebase aplikasi diunggah ke *cloud platform* Firebase
 
 ## Tautan APK
-[https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/pre](https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/pre)
+[https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/1.0.1](https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/1.0.1)
