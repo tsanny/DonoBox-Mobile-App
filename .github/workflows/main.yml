@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run : cd donobox
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
