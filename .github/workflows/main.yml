@@ -5,41 +5,49 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    working-directory: ./donobox
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./donobox
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
+          working-directory: ./donobox
           distribution: "zulu"
           java-version: "11"
       - name: Decode google-services.json
+        working-directory: ./donobox
         env: 
             GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
       - name: Decode firebase_option
+        working-directory: ./donobox
         env:
           firebase_options_dart: ${{secrets.FIREBASE_OPTION}}
         run : echo "$firebase_options_dart" > lib/firebase_options.dart
-
       - uses: subosito/flutter-action@v2
         with:
+          working-directory: ./donobox
           channel: "stable"
       - run: flutter pub get
+        working-directory: ./donobox
       - run: flutter build apk
+        working-directory: ./donobox
       - uses: actions/upload-artifact@v1
         with:
           name: release-apk
-          path: ../build/app/outputs/apk/release/app-release.apk
+          working-directory: ./donobox
+          path: build/app/outputs/apk/release/app-release.apk
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
             appId: ${{secrets.APPID}}
             token: ${{secrets.TOKEN}}
             groups: pre-tester
+            working-directory: ./donobox
             file: build/app/outputs/apk/release/app-release.apk
