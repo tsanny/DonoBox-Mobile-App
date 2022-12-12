@@ -12,7 +12,14 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage();
+  const RegisterPage({
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
+
+  final String loggedUsername;
+  final String loggedRole;
+
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -37,7 +44,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // TODO: implement build
     return Scaffold(
-      drawer: const drawer(),
+        drawer: drawer(
+          loggedUsername: widget.loggedUsername,
+          loggedRole: widget.loggedRole,
+        ),
       appBar: AppBar(
         backgroundColor: Color(0xFF3F4E4F),
         title: Text(""),
@@ -214,7 +224,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
+                                      builder: (context) => LoginPage(
+                                        loggedUsername: widget.loggedUsername,
+                                        loggedRole: widget.loggedRole,
+                                      )),
                                 ),
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

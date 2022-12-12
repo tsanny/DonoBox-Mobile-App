@@ -11,7 +11,14 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({
+    super.key,
+    required this.loggedRole,
+    required this.loggedUsername,
+  });
+
+  String loggedRole;
+  String loggedUsername;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -39,7 +46,10 @@ class _LoginPageState extends State<LoginPage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(""),
       ),
-      drawer: const drawer(),
+        drawer: drawer(
+          loggedUsername: widget.loggedUsername,
+          loggedRole: widget.loggedRole,
+        ),
       body: Form(
         key: _loginFormKey,
         child: Container(
@@ -142,12 +152,19 @@ class _LoginPageState extends State<LoginPage> {
                             'password': password1,
                           });
                       if (request.loggedIn) {
+                        setState(() {
+                          widget.loggedUsername = response["username"];
+                          widget.loggedRole = response["role"];
+                        });
                         // Code here will run if the login succeeded.
                         _loginFormKey.currentState!.reset();
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()),
+                              builder: (context) => HomePage(
+                                loggedUsername: widget.loggedUsername,
+                                loggedRole: widget.loggedRole,
+                              )),
                         );
                       } else {
                         // Code here will run if the login failed (wrong username/password).
@@ -214,7 +231,10 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
+                            builder: (context) => RegisterPage(
+                              loggedUsername: widget.loggedUsername,
+                              loggedRole: widget.loggedRole,
+                            )),
                       );
                     },
                   )

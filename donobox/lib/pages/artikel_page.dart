@@ -10,7 +10,14 @@ import 'login.dart';
 import '../../drawer/sidebar.dart';
 
 class ArtikelPage extends StatefulWidget {
-  const ArtikelPage({Key? key}) : super(key: key);
+  const ArtikelPage({
+    Key? key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   _ArtikelState createState() => _ArtikelState();
@@ -30,7 +37,10 @@ class _ArtikelState extends State<ArtikelPage> {
         backgroundColor: Color(0xFF3F4E4F),
         title: const Text('Article'),
       ),
-      drawer: drawer(),
+      drawer: drawer(
+        loggedUsername: widget.loggedUsername,
+        loggedRole: widget.loggedRole,
+      ),
       body: FutureBuilder(
           future: fetchArtikel(),
           builder: (context, AsyncSnapshot snapshot) {
@@ -89,7 +99,10 @@ class _ArtikelState extends State<ArtikelPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ArtikelDetailPage(
-                                    artikel: snapshot.data![index]),
+                                    artikel: snapshot.data![index],
+                                    loggedUsername: widget.loggedUsername,
+                                    loggedRole: widget.loggedRole,
+                                ),
                               ),
                             );
                           },
@@ -128,7 +141,10 @@ class _ArtikelState extends State<ArtikelPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
+                                      builder: (context) => LoginPage(
+                                        loggedUsername: widget.loggedUsername,
+                                        loggedRole: widget.loggedRole,
+                                      )),
                                 );
                               },
                               child: Text(
@@ -269,7 +285,10 @@ class _ArtikelState extends State<ArtikelPage> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              const ArtikelPage()),
+                                                              ArtikelPage(
+                                                                loggedUsername: widget.loggedUsername,
+                                                                loggedRole: widget.loggedRole,
+                                                              )),
                                                     )
                                                   });
                                             }
@@ -298,7 +317,10 @@ class _ArtikelState extends State<ArtikelPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const ArtikelPage()),
+                                                              ArtikelPage(
+                                                                loggedUsername: widget.loggedUsername,
+                                                                loggedRole: widget.loggedRole,
+                                                              )),
                                           ),
                                           child: const Text("Kembali",
                                               style: TextStyle(

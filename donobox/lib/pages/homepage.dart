@@ -1,5 +1,6 @@
 import 'package:donobox/model/mynotification.dart';
 import 'package:donobox/pages/AboutUsPage.dart';
+import 'package:donobox/pages/crowdfunds.dart';
 import 'package:donobox/pages/FAQPage.dart';
 import 'package:donobox/pages/mynotification_page.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,14 @@ import 'package:donobox/pages/artikel_page.dart';
 import 'package:donobox/pages/profile.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -45,14 +53,20 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const MyNotificationPage()),
+                  MaterialPageRoute(builder: (context) => MyNotificationPage(
+                    loggedUsername: widget.loggedUsername,
+                    loggedRole: widget.loggedRole,
+                  )),
                 );
               },
             )
             :Container(),
           ],
         ),
-        drawer: const drawer(),
+        drawer: drawer(
+          loggedUsername: widget.loggedUsername,
+          loggedRole: widget.loggedRole,
+        ),
         body: SafeArea(
             child: Container(
                 margin: const EdgeInsets.only(top: 0, left: 24, right: 24),
@@ -89,7 +103,10 @@ class _HomePageState extends State<HomePage> {
                                   context,
 
                                   MaterialPageRoute(
-                                      builder: (context) => const AboutUs()),
+                                      builder: (context) => AboutUs(
+                                        loggedUsername: widget.loggedUsername,
+                                        loggedRole: widget.loggedRole,
+                                      )),
                                 );
                               },
                               child: Card(
@@ -169,7 +186,10 @@ class _HomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const ArtikelPage()),
+                                          ArtikelPage(
+                                            loggedUsername: widget.loggedUsername,
+                                            loggedRole: widget.loggedRole,
+                                          )),
                                 );
                               },
 
@@ -185,7 +205,10 @@ class _HomePageState extends State<HomePage> {
                                 // Route menu ke halaman form
                                 Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                                  MaterialPageRoute(builder: (context) => ProfilePage(
+                                    loggedUsername: widget.loggedUsername,
+                                    loggedRole: widget.loggedRole,
+                                  )),
                                 );
                               },
 
@@ -224,14 +247,15 @@ class _HomePageState extends State<HomePage> {
 
                             ),
                             GestureDetector(
-                              // sambungin ke page modul masing2
-                              // onTap: () {
-                              //   // Route menu ke halaman form
-                              //   Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(builder: (context) => const MyHomePage()),
-                              //   );
-                              // },
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => CrowdfundsPage(
+                                    loggedUsername: widget.loggedUsername,
+                                    loggedRole: widget.loggedRole,
+                                  )),
+                                );
+                              },
 
                               child: Card(
 
@@ -289,7 +313,10 @@ class _HomePageState extends State<HomePage> {
                                   context,
 
                                   MaterialPageRoute(
-                                      builder: (context) => const FAQ()),
+                                      builder: (context) => FAQ(
+                                        loggedUsername: widget.loggedUsername,
+                                        loggedRole: widget.loggedRole,
+                                      )),
                                 );
                               },
                               child: _roundedButton(title: 'FAQ'),
@@ -302,7 +329,10 @@ class _HomePageState extends State<HomePage> {
                                   context,
 
                                   MaterialPageRoute(
-                                      builder: (context) => const AskUsPage()),
+                                      builder: (context) => AskUsPage(
+                                        loggedUsername: widget.loggedUsername,
+                                        loggedRole: widget.loggedRole,
+                                      )),
                                 );
                               },
                               child: _roundedButton(title: 'Ask Us'),

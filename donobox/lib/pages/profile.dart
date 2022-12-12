@@ -13,7 +13,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({
+    Key? key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -67,13 +74,19 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => HomePage(
+                    loggedUsername: widget.loggedUsername,
+                    loggedRole: widget.loggedRole,
+                  )),
                 );
               },
             ),
           ],
         ),
-        drawer: drawer(),
+        drawer: drawer(
+          loggedUsername: widget.loggedUsername,
+          loggedRole: widget.loggedRole,
+        ),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -235,7 +248,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                       onPressed: () {
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => const EditProfilePage()),
+                                          MaterialPageRoute(builder: (context) => EditProfilePage(
+                                            loggedUsername: widget.loggedUsername,
+                                            loggedRole: widget.loggedRole,
+                                          )),
                                         );
                                       },
                                       heroTag: 'editprofile',
@@ -338,7 +354,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                   context,
                                                                   MaterialPageRoute(
                                                                       builder: (context) =>
-                                                                      const ProfilePage()),
+                                                                      ProfilePage(
+                                                                        loggedUsername: widget.loggedUsername,
+                                                                        loggedRole: widget.loggedRole,
+                                                                      )),
                                                                 )
                                                               });
                                                               print(response);
@@ -368,7 +387,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             context,
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
-                                                                const ProfilePage()),
+                                                                ProfilePage(
+                                                                  loggedUsername: widget.loggedUsername,
+                                                                  loggedRole: widget.loggedRole,
+                                                                )),
                                                           ),
                                                           child: const Text("Kembali",
                                                               style: TextStyle(

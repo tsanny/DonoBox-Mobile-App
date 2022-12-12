@@ -23,7 +23,14 @@ bool isNumeric(String s) {
 
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  const EditProfilePage({
+    super.key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -69,7 +76,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => HomePage(
+                    loggedUsername: widget.loggedUsername,
+                    loggedRole: widget.loggedRole,
+                  )),
                 );
               },
             ),
@@ -206,7 +216,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                              const ProfilePage(),
+                              ProfilePage(
+                                loggedUsername: widget.loggedUsername,
+                                loggedRole: widget.loggedRole,
+                              ),
                         )
                         )});
 

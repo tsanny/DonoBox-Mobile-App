@@ -1,5 +1,6 @@
 import 'package:donobox/pages/AboutUsPage.dart';
 import 'package:donobox/pages/AskUsPage.dart';
+import 'package:donobox/pages/crowdfunds.dart';
 import 'package:donobox/pages/mynotification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:donobox/pages/artikel_page.dart';
@@ -14,7 +15,14 @@ import '../pages/homepage.dart';
 // var adaPP = false;
 
 class drawer extends StatelessWidget {
-  const drawer({Key? key}) : super(key: key);
+  drawer({
+    Key? key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
+
+  String loggedUsername;
+  String loggedRole;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,10 @@ class drawer extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ProfilePage()),
+                        builder: (context) => ProfilePage(
+                          loggedUsername: loggedUsername,
+                          loggedRole: loggedRole,
+                        )),
                   );
                 },
                 child: Container(
@@ -84,7 +95,10 @@ class drawer extends StatelessWidget {
               onTap: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => HomePage(
+                    loggedUsername: loggedUsername,
+                    loggedRole: loggedRole,
+                  )),
                 );
               },
             ),
@@ -98,7 +112,10 @@ class drawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyNotificationPage()),
+                            builder: (context) => MyNotificationPage(
+                              loggedUsername: loggedUsername,
+                              loggedRole: loggedRole,
+                            )),
                       );
                     },
                   )
@@ -112,7 +129,10 @@ class drawer extends StatelessWidget {
               onTap: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const AboutUs()),
+                  MaterialPageRoute(builder: (context) => AboutUs(
+                              loggedUsername: loggedUsername,
+                              loggedRole: loggedRole,
+                  )),
                 );
               },
             ),
@@ -123,7 +143,10 @@ class drawer extends StatelessWidget {
                 // Route menu ke halaman utama
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const ArtikelPage()),
+                  MaterialPageRoute(builder: (context) => ArtikelPage(
+                              loggedUsername: loggedUsername,
+                              loggedRole: loggedRole,
+                  )),
                 );
               },
             ),
@@ -134,7 +157,10 @@ class drawer extends StatelessWidget {
                 // Route menu ke halaman utama
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(builder: (context) => ProfilePage(
+                              loggedUsername: loggedUsername,
+                              loggedRole: loggedRole,
+                  )),
                 );
               },
             ),
@@ -146,7 +172,10 @@ class drawer extends StatelessWidget {
                 // Route menu ke halaman utama
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => CrowdfundsPage(
+                              loggedUsername: loggedUsername,
+                              loggedRole: loggedRole,
+                  )),
                 );
               },
             ),
@@ -159,7 +188,10 @@ class drawer extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
+                            builder: (context) => LoginPage(
+                              loggedUsername: loggedUsername,
+                              loggedRole: loggedRole,
+                            )),
                       );
                     },
                   )
@@ -169,10 +201,15 @@ class drawer extends StatelessWidget {
                     onTap: () async {
                       final response = await request.logout(
                           "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
+                      loggedUsername = '';
+                      loggedRole = '';
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => HomePage(
+                                loggedUsername: loggedUsername,
+                                loggedRole: loggedRole,
+                              )));
                     },
                   )
           ],

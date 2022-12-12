@@ -24,8 +24,16 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String loggedUsername = "";
+  String loggedRole = "";
 
   // This widget is the root of your application.
   @override
@@ -40,7 +48,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen(title: 'Flutter Login UI'),
+        home: SplashScreen(
+          title: 'Flutter Login UI',
+          loggedUsername: loggedUsername,
+          loggedRole: loggedRole,
+        ),
       ),
     );
   }

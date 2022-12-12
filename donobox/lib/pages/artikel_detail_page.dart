@@ -5,8 +5,15 @@ import '../../drawer/sidebar.dart';
 
 class ArtikelDetailPage extends StatelessWidget {
   final Artikel artikel;
+  final String loggedUsername;
+  final String loggedRole;
 
-  const ArtikelDetailPage({Key? key, required this.artikel}) : super(key: key);
+  const ArtikelDetailPage({
+    Key? key,
+    required this.artikel,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,10 @@ class ArtikelDetailPage extends StatelessWidget {
         backgroundColor: Color(0xFF3F4E4F),
         title: const Text('Detail'),
       ),
-      drawer: const drawer(),
+        drawer: drawer(
+          loggedUsername: loggedUsername,
+          loggedRole: loggedRole,
+        ),
       body: Row(
         children: <Widget>[
           Expanded(

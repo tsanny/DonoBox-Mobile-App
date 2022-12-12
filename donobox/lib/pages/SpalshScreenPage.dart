@@ -5,9 +5,16 @@ import 'package:flutter/material.dart';
 
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key, required this.title}) : super(key: key);
+  SplashScreen({
+    Key? key,
+    required this.title,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
 
   final String title;
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -22,7 +29,10 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => HomePage(
+            loggedUsername: widget.loggedUsername,
+            loggedRole: widget.loggedRole,
+          )),
         );
       });
     });

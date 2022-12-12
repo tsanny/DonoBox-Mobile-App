@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import '../drawer/sidebar.dart';
 
 class AboutUs extends StatelessWidget {
-  const AboutUs({Key? key}) : super(key: key);
+  const AboutUs({
+    Key? key,
+    required this.loggedUsername,
+    required this.loggedRole,
+    }) : super(key: key);
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +18,10 @@ class AboutUs extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF3F4E4F),
       ),
-      drawer: const drawer(),
+      drawer: drawer(
+        loggedUsername: loggedUsername,
+        loggedRole: loggedRole,
+      ),
       body: SafeArea(
         child: Column(
           children: [

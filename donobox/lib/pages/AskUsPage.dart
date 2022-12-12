@@ -11,7 +11,14 @@ import '../model/faq_model.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class AskUsPage extends StatefulWidget {
-  const AskUsPage({Key? key}) : super(key: key);
+  const AskUsPage({
+    Key? key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  }) : super(key: key);
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   State<AskUsPage> createState() => _AskUsPageState();
@@ -49,7 +56,10 @@ class _AskUsPageState extends State<AskUsPage> {
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
         ),
-        drawer: const drawer(),
+        drawer: drawer(
+          loggedUsername: widget.loggedUsername,
+          loggedRole: widget.loggedRole,
+        ),
         body: Form(
           key: _formKey,
           child: Padding(
@@ -106,7 +116,10 @@ class _AskUsPageState extends State<AskUsPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
+                                  builder: (context) => LoginPage(
+                                    loggedUsername: widget.loggedUsername,
+                                    loggedRole: widget.loggedRole,
+                                  )),
                             );
                           },
                         ),

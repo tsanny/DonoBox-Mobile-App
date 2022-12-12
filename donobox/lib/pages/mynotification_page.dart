@@ -10,7 +10,14 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 class MyNotificationPage extends StatefulWidget {
-  const MyNotificationPage({ super.key });
+  const MyNotificationPage({
+    super.key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   _MyNotificationPageState createState() => _MyNotificationPageState();
@@ -40,7 +47,10 @@ class _MyNotificationPageState extends State<MyNotificationPage> {
                 backgroundColor: Color(0xFF3F4E4F),
                 title: const Text('My Notification'),
             ),
-            drawer: const drawer(),
+            drawer: drawer(
+              loggedUsername: widget.loggedUsername,
+              loggedRole: widget.loggedRole,
+            ),
             body: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: FutureBuilder(
