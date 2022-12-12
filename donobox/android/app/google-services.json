@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "10001781780",
+    "project_id": "donobox-11ec0",
+    "storage_bucket": "donobox-11ec0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10001781780:android:9cdcaacd4bceb6dc0b8301",
+        "android_client_info": {
+          "package_name": "com.example.donobox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10001781780-91j6aotf491rup8q35kcs5jbolbt1a04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVFA2NRJ214wpGz_h991jYbYpLm04pKp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "10001781780-91j6aotf491rup8q35kcs5jbolbt1a04.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "10001781780-kt7jf6sqbv11kl31c48q80b404abdgv7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.donobox"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
