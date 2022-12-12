@@ -10,6 +10,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 import 'package:donobox/pages/artikel_page.dart';
+import 'package:donobox/pages/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -180,13 +181,13 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             GestureDetector(
                               // sambungin ke page modul masing2
-                              // onTap: () {
-                              //   // Route menu ke halaman form
-                              //   Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(builder: (context) => const MyHomePage()),
-                              //   );
-                              // },
+                              onTap: () {
+                                // Route menu ke halaman form
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                                );
+                              },
 
                               child: Card(
 
