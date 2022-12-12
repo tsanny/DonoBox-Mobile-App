@@ -290,6 +290,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             onChanged: (String? value) {
                                                               setState(() {
                                                                 nominalSaldo = int.parse(value!);
+                                                                print(nominalSaldo);
                                                               });
                                                             },
                                                             onSaved: ((String? value) {
@@ -331,6 +332,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                       const ProfilePage()),
                                                                 )
                                                               });
+                                                              print(response);
                                                             }
                                                           },
                                                           child: const Text("Tambah",

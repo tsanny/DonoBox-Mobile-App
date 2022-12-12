@@ -38,7 +38,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    final request = context.read<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
@@ -181,7 +181,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onPressed: () async{
                     if (_formKey.currentState!.validate()) {
                       final response = await request.post(
-                          "https://pbp-c04.up.railway.app/profile/edit-profile-flutter/",
+                          "https://pbp-c04.up.railway.app/profile/edit-profile-flutter",
+
                           {
                             'bio': _bio,
                             'phone': _phoneNumber,
