@@ -51,10 +51,9 @@ class drawer extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 52,
-                        backgroundImage: AssetImage('assets/profile.png'),
-                      ),
+                      Image.asset('assets/logo.png', height: 70,
+                        width: 70,
+                        fit: BoxFit.fitWidth,),
                       SizedBox(height: 12),
                       Text(
                         request.jsonData['username'] == null

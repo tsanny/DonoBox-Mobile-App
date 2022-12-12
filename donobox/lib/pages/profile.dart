@@ -21,7 +21,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _tambahSaldoFormKey = GlobalKey<FormState>();
-  var nominalSaldo = 0;
+  var nominalSaldo = "0";
   var profilePictureUrl = "";
   var url = "https://pbp-c04.up.railway.app/profile/";
   var adaPP = false;
@@ -298,13 +298,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             },
                                                             onChanged: (String? value) {
                                                               setState(() {
-                                                                nominalSaldo = int.parse(value!);
+                                                                nominalSaldo = value!;
                                                                 print(nominalSaldo);
                                                               });
                                                             },
                                                             onSaved: ((String? value) {
                                                               setState(() {
-                                                                nominalSaldo = int.parse(value!);
+                                                                nominalSaldo = value!;
                                                               });
                                                             }),
                                                           )
@@ -330,7 +330,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             if (_tambahSaldoFormKey.currentState!
                                                                 .validate()) {
                                                               final response = await request.post(
-                                                                  "https://pbp-c04.up.railway.app/profile/saldo/",
+                                                                  "https://pbp-c04.up.railway.app/profile/saldo-flutter",
                                                                   {
                                                                     'saldo': (nominalSaldo),
                                                                   }).then((value) => {

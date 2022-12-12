@@ -4,6 +4,24 @@ import 'package:donobox/pages/homepage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
+
+bool isEmail(String em) {
+
+  String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+  RegExp regExp = new RegExp(p);
+
+  return regExp.hasMatch(em);
+}
+
+bool isNumeric(String s) {
+  if (s == null) {
+    return false;
+  }
+  return double.tryParse(s) != null;
+}
+
+
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
 
@@ -33,7 +51,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
   String _bio = "";
   String _phoneNumber = "";
-  // String _birthDay = "";
   String _email = "";
 
   @override
@@ -92,6 +109,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         _bio = value!;
                       });
                     },
+
                   ),
                 ),
                 Padding(
@@ -121,7 +139,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         _phoneNumber = value!;
                       });
                     },
-
+                    validator: (String? value){
+                      if (_phoneNumber.isNotEmpty && !isNumeric(_phoneNumber)){
+                        return 'Nomor telepon tidak valid';
+                      }
+                      return null;
+                    },
                   ),
                 ),
 
@@ -151,6 +174,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       setState(() {
                         _email = value!;
                       });
+                    },
+                    validator: (String? value){
+                      if (_email.isNotEmpty && !isEmail(_email)){
+                        return 'Email tidak valid';
+                      }
+                      return null;
                     },
                   ),
                 ),
