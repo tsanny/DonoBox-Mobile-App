@@ -9,7 +9,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./donobox
     steps:
       - run : cd donobox
       - uses: actions/checkout@v3
