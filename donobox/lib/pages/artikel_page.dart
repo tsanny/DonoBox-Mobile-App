@@ -69,7 +69,7 @@ class _ArtikelState extends State<ArtikelPage> {
                                 Text(
                                   "${snapshot.data![index].title}",
                                   style: const TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 28.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
