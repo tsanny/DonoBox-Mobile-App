@@ -280,7 +280,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 else if (value["message"]["username"] != null)
                                   {
-                                    print(value["message"]["username"][0]),
                                     showDialog(
                                       context: context,
                                       builder: (context) {
@@ -327,7 +326,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 else if (value["message"]["password2"] != null)
                                   {
-                                    print(value["message"]["password2"][0]),
                                     showDialog(
                                       context: context,
                                       builder: (context) {

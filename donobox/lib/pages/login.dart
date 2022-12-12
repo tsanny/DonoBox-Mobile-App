@@ -141,7 +141,6 @@ class _LoginPageState extends State<LoginPage> {
                             'username': username,
                             'password': password1,
                           });
-                      print(request.cookies);
                       if (request.loggedIn) {
                         // Code here will run if the login succeeded.
                         _loginFormKey.currentState!.reset();
