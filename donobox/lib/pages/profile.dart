@@ -19,10 +19,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _tambahSaldoFormKey = GlobalKey<FormState>();
-  var nominalSaldo = 0;
+  var nominalSaldo = "";
 
   Future<List<Profile>> fetchProfile() async {
-    final request = context.watch<CookieRequest>();
+    final request = context.read<CookieRequest>();
     final response = await request.get('https://pbp-c04.up.railway.app/profile/json');
 
     // melakukan konversi data json menjadi object MyNotification
@@ -289,13 +289,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             },
                                                             onChanged: (String? value) {
                                                               setState(() {
-                                                                nominalSaldo = int.parse(value!);
+                                                                nominalSaldo = (value!);
                                                                 print(nominalSaldo);
                                                               });
                                                             },
                                                             onSaved: ((String? value) {
                                                               setState(() {
-                                                                nominalSaldo = int.parse(value!);
+                                                                nominalSaldo = (value!);
                                                               });
                                                             }),
                                                           )
