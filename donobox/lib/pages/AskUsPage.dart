@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:donobox/pages/ListPertanyaan.dart';
 import 'package:donobox/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -155,83 +156,27 @@ class _AskUsPageState extends State<AskUsPage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Expanded(
-                      child: FutureBuilder(
-                          future: fetchFaq(),
-                          builder: (context, AsyncSnapshot<List<Faq>> snapshot){
-                            if (snapshot.data == null) {
-                              return const Center(child: CircularProgressIndicator());
-                            } else {
-                              if (snapshot.data!.isEmpty){
-                                return Column(
-                                  children: const [
-                                    SizedBox(height: 8),
-                                  ],
-                                );
-                              } else{
-                                return Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: ListView.builder(
-                                      itemCount: snapshot.data!.length,
-                                      itemBuilder: (context, index){
-                                        return Container(
-                                          margin: new EdgeInsets.fromLTRB(0, 0, 0, 15),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(12),
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey.withOpacity(0.5),
-                                                spreadRadius: 5,
-                                                blurRadius: 7,
-                                                offset: Offset(0, 3),
-                                              ),
-                                            ],
-                                          ),
-                                          child: ListTile(
-                                            title:
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    snapshot.data![index].user,
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Color(0xFF879999),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                                  child: Text(
-                                                    snapshot.data![index].pertanyaan,
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                  ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  snapshot.data![index].jawaban,
-                                                  style: const TextStyle(
-                                                    fontSize: 15,
-                                                    fontStyle: FontStyle.normal,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                  ),
-                                );
-                              }
-                            }
-                          })
+                  Center(
+                    child: MaterialButton(
+                      color: Color(0xFFA2CC83),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                          side: BorderSide(color: Color(0xFFDCF5E6))),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ListPertanyaan()),
+                        );
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 14.0),
+                        child: Text(
+                          "Liat Pertanyaan",
+                          style: TextStyle(color: Colors.white, fontSize: 14.0),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
