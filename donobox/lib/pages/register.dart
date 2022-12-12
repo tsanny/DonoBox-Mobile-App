@@ -216,6 +216,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                   MaterialPageRoute(
                                       builder: (context) => const LoginPage()),
                                 ),
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Color(0xFF3F4E4F),
+                                    content: Text("Registrasi berhasil!"),
+                                    action: SnackBarAction(
+                                        label: 'Ok',
+                                        textColor: Colors.white,
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar;
+                                        }),
+                                  ),
+                                ),
                                 request.logout(
                                     "https://pbp-c04.up.railway.app/autentikasi/logout_apk/")
                               }

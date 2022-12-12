@@ -16,7 +16,6 @@ import '../pages/homepage.dart';
 class drawer extends StatelessWidget {
   const drawer({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
@@ -33,42 +32,45 @@ class drawer extends StatelessWidget {
     );
   }
 
-  Widget buildHeader(BuildContext context,  CookieRequest request) => Material(
+  Widget buildHeader(BuildContext context, CookieRequest request) => Material(
         color: Color(0xFF3F4E4F),
-        child:
-        request.loggedIn
-          ?InkWell(
-          onTap: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
-          },
-          child: Container(
-            color: Color(0xFF3F4E4F),
-            padding: EdgeInsets.only(
-              top: 24 + MediaQuery.of(context).padding.top,
-              bottom: 24,
-            ),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 52,
-                  backgroundImage: AssetImage('assets/profile.png'),
+        child: request.loggedIn
+            ? InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage()),
+                  );
+                },
+                child: Container(
+                  color: Color(0xFF3F4E4F),
+                  padding: EdgeInsets.only(
+                    top: 24 + MediaQuery.of(context).padding.top,
+                    bottom: 24,
+                  ),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 52,
+                        backgroundImage: AssetImage('assets/profile.png'),
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        request.jsonData['username'] == null
+                            ? ""
+                            : "${request.jsonData['username']}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(height: 12),
-                Text(request.jsonData['username'] == null
-                    ? ""
-                    : "${request.jsonData['username']}",
-                  style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,),
-                )],
-            ),
-          ),
-        )
-          : Container(),
+              )
+            : Container(),
       );
 
   Widget buildMenuItems(BuildContext context, CookieRequest request) =>
@@ -89,18 +91,18 @@ class drawer extends StatelessWidget {
             ),
             request.loggedIn
                 ? ListTile(
-              leading:
-              const Icon(Icons.notifications, color: Color(0xFFA2CC83)),
-              title: const Text('Notifications'),
-              onTap: () {
-                // Route menu ke halaman notifikasi
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MyNotificationPage()),
-                );
-              },
-            )
+                    leading: const Icon(Icons.notifications,
+                        color: Color(0xFFA2CC83)),
+                    title: const Text('Notifications'),
+                    onTap: () {
+                      // Route menu ke halaman notifikasi
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyNotificationPage()),
+                      );
+                    },
+                  )
                 : Container(),
             ListTile(
               leading: Image.asset(
@@ -139,7 +141,7 @@ class drawer extends StatelessWidget {
             ),
             ListTile(
               leading:
-              const Icon(Icons.money_rounded, color: Color(0xFFA2CC83)),
+                  const Icon(Icons.money_rounded, color: Color(0xFFA2CC83)),
               title: const Text('CrowdFund'),
               onTap: () {
                 // Route menu ke halaman utama
@@ -151,10 +153,11 @@ class drawer extends StatelessWidget {
             ),
             !request.loggedIn
                 ? ListTile(
+                    leading: const Icon(Icons.login, color: Color(0xFFA2CC83)),
                     title: const Text('Login'),
                     onTap: () {
                       // Route menu ke halaman form
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const LoginPage()),
@@ -162,14 +165,15 @@ class drawer extends StatelessWidget {
                     },
                   )
                 : ListTile(
+                    leading: const Icon(Icons.logout, color: Color(0xFFA2CC83)),
                     title: const Text("Logout"),
                     onTap: () async {
-                      Navigator.push(
+                      final response = await request.logout(
+                          "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const HomePage()));
-                      final response = await request.logout(
-                          "https://pbp-c04.up.railway.app/autentikasi/logout_apk/");
                     },
                   )
           ],
