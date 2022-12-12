@@ -44,3 +44,6 @@ Dengan adanya DonoBox, pengguna dapat berdonasi atau bersedekah sebagai bentuk s
 3. Branch-branch modul yang sudah selesai digabungkan ke branch utama untuk dideploy
 4. Codebase yang sudah selesai kemudian dibuat menjadi file APK
 5. File APK dari Codebase aplikasi diunggah ke *cloud platform* Firebase
+
+## Tautan APK
+[https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/pre](https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/pre)
