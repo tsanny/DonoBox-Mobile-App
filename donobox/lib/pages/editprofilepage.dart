@@ -33,7 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
   String _bio = "";
   String _phoneNumber = "";
-  String _birthDay = "";
+  // String _birthDay = "";
   String _email = "";
 
   @override
@@ -42,7 +42,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF3F4E4F),
-          title: const Text('Hi, username!'),
+          title: const Text('Edit Profile'),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.notifications_active,
@@ -154,22 +154,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Text("${selectedDate.toLocal()}".split(' ')[0]),
-                      SizedBox(height: 20.0,),
-                      ElevatedButton(
-                        onPressed: () => _selectDate(context),
-                        child: Text('Select Birthday'),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Color(0xFFA2CC83)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 TextButton(
                   child: const Text(
                     "Simpan",

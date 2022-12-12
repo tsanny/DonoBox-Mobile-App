@@ -9,6 +9,8 @@ import 'package:donobox/pages/homepage.dart';
 import 'package:http/http.dart' as http;
 import 'package:donobox/model/profile.dart';
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -19,7 +21,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _tambahSaldoFormKey = GlobalKey<FormState>();
-  var nominalSaldo = "";
+  var nominalSaldo = 0;
+  var profilePictureUrl = "";
+  var url = "https://pbp-c04.up.railway.app/profile/";
+  var adaPP = false;
 
   Future<List<Profile>> fetchProfile() async {
     final request = context.read<CookieRequest>();
@@ -33,6 +38,13 @@ class _ProfilePageState extends State<ProfilePage> {
         listProfile.add(Profile.fromJson(d));
       }
     }
+    var linkPicture = listProfile[0].fields.picture;
+    if (linkPicture != 'media/person.png'){
+      adaPP = true;
+    }
+    url = "https://pbp-c04.up.railway.app/profile/";
+    url += listProfile[0].fields.picture;
+    print("URLPROFILEPICTURE: " + url);
     return listProfile;
 
   }
@@ -65,15 +77,6 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding : EdgeInsets.fromLTRB(30, 40, 30, 40),
-              child: Center(
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/profile.png'),
-                  radius: 60,
-                ),
-              )
-            ),
             Expanded(
               flex: 1,
               child: FutureBuilder(
@@ -99,6 +102,34 @@ class _ProfilePageState extends State<ProfilePage> {
                             itemBuilder: (_, index) =>
                             Column(
                               children: [
+                                Padding(
+                                    padding : EdgeInsets.fromLTRB(30, 40, 30, 40),
+                                    child: Center(
+                                      child:
+                                      // CachedNetworkImage(
+                                      //   imageUrl: 'https://pbp-c04.up.railway.app/profile/media/Fhl4-CZagAA7yEG.jpeg',
+                                      //   imageBuilder: (context, imageProvider) => Container(
+                                      //     width: 80.0,
+                                      //     height: 80.0,
+                                      //     decoration: BoxDecoration(
+                                      //       shape: BoxShape.circle,
+                                      //       image: DecorationImage(
+                                      //           image: imageProvider, fit: BoxFit.cover),
+                                      //     ),
+                                      //   ),
+                                      //   placeholder: (context, url) => CircularProgressIndicator(),
+                                      //   errorWidget: (context, url, error) => Icon(Icons.error),
+                                      // ),
+                                      CircleAvatar(
+                                        backgroundImage: adaPP?
+                                        NetworkImage(url):
+                                        AssetImage('assets/profile.png') as ImageProvider,
+                                         //  const [NetworkImage(url)]
+                                         // : const [AssetImage('asset/profile.png')],
+                                        radius: 60,
+                                      ),
+                                    )
+                                ),
                                 if (snapshot.data![index].fields.bio != null)
                                     Text("'${snapshot.data![index].fields.bio}'",
                                       style: TextStyle(
@@ -165,28 +196,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     if (snapshot.data![index].fields.email != null)
                                       Text(
                                         "${snapshot.data![index].fields.email}",
-                                        style: TextStyle(
-                                            color: Color(0xFF879999),
-                                            fontSize: 18,
-                                            letterSpacing: 1
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                                SizedBox(height: 20),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.cake,
-                                      color: Color(0xFF879999),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    if (snapshot.data![index].fields.birthday != null)
-                                      Text(
-                                        "${snapshot.data![index].fields.birthday}",
                                         style: TextStyle(
                                             color: Color(0xFF879999),
                                             fontSize: 18,
@@ -289,13 +298,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             },
                                                             onChanged: (String? value) {
                                                               setState(() {
-                                                                nominalSaldo = (value!);
+                                                                nominalSaldo = int.parse(value!);
                                                                 print(nominalSaldo);
                                                               });
                                                             },
                                                             onSaved: ((String? value) {
                                                               setState(() {
-                                                                nominalSaldo = (value!);
+                                                                nominalSaldo = int.parse(value!);
                                                               });
                                                             }),
                                                           )
@@ -323,7 +332,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                               final response = await request.post(
                                                                   "https://pbp-c04.up.railway.app/profile/saldo/",
                                                                   {
-                                                                    'saldo': nominalSaldo,
+                                                                    'saldo': (nominalSaldo),
                                                                   }).then((value) => {
                                                                 Navigator.pushReplacement(
                                                                   context,

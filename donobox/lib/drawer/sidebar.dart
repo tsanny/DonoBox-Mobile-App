@@ -10,13 +10,18 @@ import 'package:donobox/pages/profile.dart';
 import 'package:donobox/pages/editprofilepage.dart';
 import '../pages/homepage.dart';
 
+// var url = "https://pbp-c04.up.railway.app/profile/";
+// var adaPP = false;
+
 class drawer extends StatelessWidget {
   const drawer({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
 
+    print(request);
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
