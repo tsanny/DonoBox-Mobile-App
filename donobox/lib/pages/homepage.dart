@@ -102,8 +102,8 @@ class _HomePageState extends State<HomePage> {
                                         children: [
 
                                           Image.asset(
-                                            'assets/about_us.png',
-                                            width: 200,
+                                            'assets/logo.png',
+                                            width: 105,
                                           ),
                                           const SizedBox(
                                             height: 10,
