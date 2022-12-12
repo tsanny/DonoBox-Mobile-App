@@ -1,11 +1,19 @@
-import 'main.dart';
+import 'package:donobox/page/crowdfunds.dart';
+import '../main.dart';
 import 'login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  const AppDrawer({
+    super.key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
+
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +29,25 @@ class AppDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const MyHomePage(
+                    builder: (context) => MyHomePage(
                           title: '',
+                          loggedUsername: loggedUsername,
+                          loggedRole: loggedRole,
                         )),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Crowdfund'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CrowdfundsPage(
+                    loggedUsername: loggedUsername,
+                    loggedRole: loggedRole,
+                  )
+                ),
               );
             },
           ),
@@ -35,7 +59,10 @@ class AppDrawer extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginPage()),
+                          builder: (context) => LoginPage(
+                            loggedUsername: loggedUsername,
+                            loggedRole: loggedRole,
+                          )),
                     );
                   },
                 )

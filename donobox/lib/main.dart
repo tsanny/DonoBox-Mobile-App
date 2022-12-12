@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'login.dart';
-import 'drawer.dart';
+import 'page/login.dart';
+import 'page/drawer.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final loggedUsername = "";
+  final loggedRole = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +31,23 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(title: 'Flutter App'),
+        home: MyHomePage(
+          title: 'Flutter App',
+          loggedUsername: loggedUsername,
+          loggedRole: loggedRole,
+        ),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({
+    super.key,
+    required this.title,
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -42,6 +59,8 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  final String loggedUsername;
+  final String loggedRole;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -75,7 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(
+        loggedUsername: widget.loggedUsername,
+        loggedRole: widget.loggedRole,
+      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.

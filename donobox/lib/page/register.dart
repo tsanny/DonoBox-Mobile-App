@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 import 'drawer.dart';
 import 'login.dart';
 import 'dart:convert';
@@ -12,7 +12,15 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage();
+  const RegisterPage({
+    super.key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
+
+  final String loggedUsername;
+  final String loggedRole;
+
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -36,7 +44,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // TODO: implement build
     return Scaffold(
-      drawer: AppDrawer(),
+      drawer: AppDrawer(
+        loggedUsername: widget.loggedUsername,
+        loggedRole: widget.loggedRole,
+      ),
       appBar: AppBar(
         title: Text(""),
       ),
@@ -201,7 +212,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LoginPage()),
+                                      builder: (context) => LoginPage(
+                                        loggedUsername: widget.loggedUsername,
+                                        loggedRole: widget.loggedRole,
+                                      )),
                                 ),
                               }
                             else

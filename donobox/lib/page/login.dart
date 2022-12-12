@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 import 'drawer.dart';
 import 'register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -10,7 +10,14 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({
+    super.key,
+    required this.loggedUsername,
+    required this.loggedRole,
+  });
+
+  String loggedUsername;
+  String loggedRole;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -37,7 +44,10 @@ class _LoginPageState extends State<LoginPage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(""),
       ),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(
+        loggedUsername: widget.loggedUsername,
+        loggedRole: widget.loggedRole,
+      ),
       body: Form(
         key: _loginFormKey,
         child: Container(
@@ -129,11 +139,17 @@ class _LoginPageState extends State<LoginPage> {
                       if (request.loggedIn) {
                         // Code here will run if the login succeeded.
                         _loginFormKey.currentState!.reset();
+                        setState(() {
+                          widget.loggedUsername = response["username"];
+                          widget.loggedRole = response["role"];
+                        });
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MyHomePage(
+                              builder: (context) => MyHomePage(
                                     title: '',
+                                    loggedUsername: widget.loggedUsername,
+                                    loggedRole: widget.loggedRole,
                                   )),
                         );
                       } else {
@@ -201,7 +217,10 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
+                            builder: (context) => RegisterPage(
+                              loggedUsername: widget.loggedUsername,
+                              loggedRole: widget.loggedRole,
+                            )),
                       );
                     },
                   )
