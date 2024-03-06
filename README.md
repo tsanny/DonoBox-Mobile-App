@@ -1,49 +1,36 @@
-# PBP-C04-mobile
-Group C04's Final Project: A Mobile App using Flutter (Platform Based Programming - Odd Semester 2022/2023)
+# About Website
+DonoBox is a website for fundraising and donating online and transparently. x platform provides a platform for individuals and organizations who want to :
 
-# Proyek Akhir Semester PBP-C04
-- Nama Aplikasi: DonoBox
+- Raise funds for social, personal, and other purposes.
+- Donate easily online through Platform X.
+- Application Benefits
+- With DonoBox, users can donate or give alms as a form of gratitude for sustenance or compassion for others easily and securely. Likewise, for donation requesters, with the X website, donations will be easier to obtain because they can reach more people with an online platform.
 
-## Anggota Kelompok
+# Tech Stack
+- Flutter
+
+# Modules that has been implemented
+- Homepage (Including authentication)
+- Profile
+- Donor page
+- Donation Submission Page
+- Article
+- Notifications
+- Roles
+- Donors
+- Donation requestor
+- Target audience and user
+- A person or group of people who need funds for a social, personal, or other purpose. Someone who wants to voluntarily fund a fundraising event.
+
+## Website Purpose/Objective
+DonoBox aims to be a place and means for people who want to donate or raise funds for those in need easily, securely, and transparently.
+
+## Competitor / Benchmarked to what website?
+The benchmark of this website is the fundraising website kitabisa.com.
+
+## Developers
 - Kevin Marcellius Alrino
 - Azhra Yashna Azka
 - Sulthan Fathurrahman Tsany
 - Nisrina Zakiyah Aeni
 - Calista Vimalametta Heryadi
-
-## Tentang Aplikasi
-DonoBox adalah aplikasi untuk menggalang dana dan berdonasi secara online dan transparan. platform x menyediakan wadah bagi individu maupun organisasi yang ingin :
-1. Menggalang dana untuk tujuan sosial, personal, dan lainnya.
-2. Berdonasi dengan mudah secara online melalui platform DonoBox.
-
-## Manfaat Aplikasi
-Dengan adanya DonoBox, pengguna dapat berdonasi atau bersedekah sebagai bentuk syukur atas rezeki ataupun rasa kasih sayang terhadap sesama dengan mudah dan terjamin. Begitupun untuk pengaju donasi, dengan aplikasi DonoBox donasi akan lebih mudah didapatkan karena dapat menjangkau lebih banyak orang dengan platform online.
-
-## Modul yang akan diimplementasikan
-- Homepage
-- Autentikasi
-- Profile 
-- Crowdfund
-- Notifikasi
-- Artikel
-
-## Roles
-- Donatur
-- Pengaju donasi
-
-## Kontrak Kinerja per Anggota Kelompok
-- Homepage: Nisrina Zakiyah Aeni
-- Autentikasi & Artikel: Kevin Marcellius Alrino
-- Profile: Azhra Yashna Azka
-- Crowdfund: Calista Vimalametta Heryadi
-- Notifikasi: Sulthan Fathurrahman Tsany
-
-## Alur Pengintegrasian dengan Web Service Aplikasi Proyek Tengah Semester
-1. Anggota kelompok membuat branch masing-masing dan mengembangkan modul pada branch tersebut
-2. Sebelum branch digabungkan ke branch utama, anggota melakukan testing untuk memastikan fitur modul berfungsi dengan baik
-3. Branch-branch modul yang sudah selesai digabungkan ke branch utama untuk dideploy
-4. Codebase yang sudah selesai kemudian dibuat menjadi file APK
-5. File APK dari Codebase aplikasi diunggah ke *cloud platform* Firebase
-
-## Tautan APK
-[https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/1.0.1](https://github.com/sulthanftr/PBP-C04-mobile/releases/tag/1.0.1)
