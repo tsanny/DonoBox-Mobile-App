@@ -1,10 +1,10 @@
 # About Website
-DonoBox is a website for fundraising and donating online and transparently. x platform provides a platform for individuals and organizations who want to :
+DonoBox is a website for fundraising and donating online and transparently. DonoBox provides a platform for individuals and organizations who want to :
 
 - Raise funds for social, personal, and other purposes.
-- Donate easily online through Platform X.
+- Donate easily online through DonoBox.
 - Application Benefits
-- With DonoBox, users can donate or give alms as a form of gratitude for sustenance or compassion for others easily and securely. Likewise, for donation requesters, with the X website, donations will be easier to obtain because they can reach more people with an online platform.
+- With DonoBox, users can donate or give alms as a form of gratitude for sustenance or compassion for others easily and securely. Likewise, for donation requesters, with DonoBox, donations will be easier to obtain because they can reach more people with an online platform.
 
 # Tech Stack
 - Flutter
